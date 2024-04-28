@@ -16,14 +16,13 @@ const MovieDetails = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [movie, setMovie] = useState(null);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
     if (!movieId) return;
 
     const fetchMovieDetails = async () => {
-      setLoading(true);
       try {
         const data = await getDetailsMovie(movieId);
         if (data) {
@@ -87,12 +86,14 @@ const MovieDetails = () => {
               <Link
                 className={moduleCss.MovieDetailsButton}
                 to={`/movies/${movieId}/cast`}
+                state={{ from: location.state?.from || '/' }}
               >
                 Cast
               </Link>
               <Link
                 className={moduleCss.MovieDetailsButton}
                 to={`/movies/${movieId}/reviews`}
+                state={{ from: location.state?.from || '/' }}
               >
                 Reviews
               </Link>

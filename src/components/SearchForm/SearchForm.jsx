@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import moduleCss from './searchForm.module.css';
 
 const SearchForm = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('query') || '';
+  const [query, setQuery] = useState(searchParams.get('query') || '');
+
+  useEffect(() => {
+    setQuery('');
+  }, []);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -19,7 +23,8 @@ const SearchForm = () => {
         type="text"
         name="query"
         placeholder="Enter movie name"
-        defaultValue={query}
+        value={query}
+        onChange={e => setQuery(e.target.value)}
       />
       <button type="submit" className={moduleCss.searchButton}>
         Search

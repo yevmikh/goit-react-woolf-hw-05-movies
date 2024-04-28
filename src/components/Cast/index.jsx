@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { getCreditsMovie } from '../../services/api';
 import moduleCss from './cast.module.css';
 import Loader from 'components/Loader/Loader';
 
 const Cast = () => {
   const { movieId } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [cast, setCast] = useState([]);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
     if (!movieId) return;
 
     const fetchCast = async () => {
-      setLoading(true);
       try {
         const data = await getCreditsMovie(movieId);
         if (data.cast) {
@@ -23,6 +24,7 @@ const Cast = () => {
           setError('No cast information available.');
         }
       } catch (error) {
+        console.error('Failed to fetch cast information:', error);
         setError('Failed to fetch cast information.');
       } finally {
         setLoading(false);
@@ -32,6 +34,11 @@ const Cast = () => {
     fetchCast();
   }, [movieId]);
 
+  const handleGoBack = () => {
+    const backLink = location.state?.from || '/';
+    navigate(backLink);
+  };
+
   if (isLoading) return <Loader />;
   if (error) return <p>{error}</p>;
   if (!cast.length) return <p>No cast information available.</p>;
@@ -39,6 +46,7 @@ const Cast = () => {
   return (
     <div>
       <h2>Casting</h2>
+      <button onClick={handleGoBack}>Go Back</button>
       <ul className={moduleCss.castGroup}>
         {cast.map(member => (
           <li className={moduleCss.castImage} key={member.cast_id}>

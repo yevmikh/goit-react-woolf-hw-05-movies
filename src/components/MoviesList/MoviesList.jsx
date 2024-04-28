@@ -1,16 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import moduleCss from './moviesList.module.css';
 
 const defaultImg =
   'https://glavcom.ua/img/article/9139/95_main-v1678685008.jpg';
 
 const MoviesList = ({ movies }) => {
+  const location = useLocation();
+
   return (
     <div className={moduleCss.moviesContainer}>
       {movies.map(movie => (
         <Link
           to={`/movies/${movie.id}`}
+          state={{ from: location }}
           className={moduleCss.movieListItem}
           key={movie.id}
         >
