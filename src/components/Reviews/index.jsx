@@ -7,14 +7,13 @@ import Loader from 'components/Loader/Loader';
 const Reviews = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
     if (!movieId) return;
 
     const fetchReviews = async () => {
-      setLoading(true);
       try {
         const { results } = await getReviewMovie(movieId);
         if (results.length > 0) {
@@ -32,7 +31,6 @@ const Reviews = () => {
 
     fetchReviews();
   }, [movieId]);
-
 
   if (isLoading) return <Loader />;
   if (error) return <p>{error}</p>;

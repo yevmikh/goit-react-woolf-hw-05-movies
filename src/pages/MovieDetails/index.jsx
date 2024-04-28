@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   useParams,
   useNavigate,
@@ -15,6 +15,7 @@ const MovieDetails = () => {
   const { movieId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const backLink = useRef(location.state?.from || '/');
   const [movie, setMovie] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -42,8 +43,7 @@ const MovieDetails = () => {
   }, [movieId]);
 
   const handleGoBack = () => {
-    const backLink = location.state?.from || '/';
-    navigate(backLink);
+    navigate(backLink.current);
   };
 
   if (isLoading) return <Loader />;
@@ -86,14 +86,12 @@ const MovieDetails = () => {
               <Link
                 className={moduleCss.MovieDetailsButton}
                 to={`/movies/${movieId}/cast`}
-                state={{ from: location.state?.from || '/' }}
               >
                 Cast
               </Link>
               <Link
                 className={moduleCss.MovieDetailsButton}
                 to={`/movies/${movieId}/reviews`}
-                state={{ from: location.state?.from || '/' }}
               >
                 Reviews
               </Link>
