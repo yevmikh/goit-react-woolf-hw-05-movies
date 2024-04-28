@@ -1,0 +1,44 @@
+.MovieDetailsContainer {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  row-gap: 20px;
+}
+
+.MovieDetailsBig {
+  padding: 20px;
+}
+
+.MovieDetailsImage {
+  border-radius: 30px;
+}
+.MovieDetailsContent {
+  padding: 0 20px;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.MovieDetailsButtonGroup {
+  display: flex;
+  gap: 20px;
+}
+
+.MovieDetailsButton {
+  border-radius: 8px;
+  padding: 5px 10px;
+  background-color: rgb(8, 77, 102);
+  color: rgb(196, 230, 242);
+  cursor: pointer;
+}
+
+.MovieDetailsButton:hover {
+  background-color: rgb(2, 30, 40);
+  box-shadow: 0 0.5px 1px rgb(2, 30, 40);
+}
+
+.MovieDetailsText {
+  color: rgb(8, 77, 102);
+}

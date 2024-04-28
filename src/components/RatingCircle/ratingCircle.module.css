@@ -1,0 +1,8 @@
+.circularProgressbar {
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  font-weight: 700;
+  background-color: rgb(8, 77, 102, 0.2);
+  border-radius: 50%;
+}

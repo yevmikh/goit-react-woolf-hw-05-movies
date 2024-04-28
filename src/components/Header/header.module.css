@@ -1,0 +1,20 @@
+.headerContainer {
+  background-color: rgb(8, 77, 102);
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 20px;
+  gap: 30px;
+
+  font-size: 18px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgb(172, 192, 199);
+}
+
+.headerItem a {
+  color: rgb(218, 229, 233);
+}
+
+.headerItem :hover {
+  color: rgb(2, 30, 40);
+}
